@@ -1,8 +1,13 @@
 from __future__ import absolute_import
 import logging
 from logging.handlers import RotatingFileHandler
+import os
 
 def setup_logger(logger_name, log_file, level=logging.DEBUG):
+    if not os.path.exists(log_file):
+        with open(log_file, 'w') as f:
+            pass
+
     l = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(module)s [%(process)d %(thread)d] | [%(filename)s:%(lineno)s - %(funcName)s() ] | \n%(message)s')
     fileHandler = logging.handlers.RotatingFileHandler(log_file, maxBytes=102400000, backupCount=5, encoding='utf8')

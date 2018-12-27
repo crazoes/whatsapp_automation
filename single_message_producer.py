@@ -101,8 +101,11 @@ class Rabbit:
         LOGGER = logging.getLogger("single_worker")
         single_message_queue_name = configp.get('queue_name', 'single_message')
         try:
+            print "starting worker"
             self.msgworker(single_message_queue_name)
         except Exception as e:
+            print "exception in main"
+            print e
             LOGGER.error(e)
 
 if __name__ == '__main__':

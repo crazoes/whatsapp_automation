@@ -1,5 +1,6 @@
 import os
 import unittest
+from configs.readconfig import configp
 from appium import webdriver
 from time import sleep
 import json

@@ -89,6 +89,7 @@ class Rabbit:
         FORMAT = '%(levelname)s: %(asctime)-15s: %(filename)s: %(funcName)s: %(module)s: %(message)s'
         logging.basicConfig(filename="/var/log/whatsapp_single_worker.log", level=logging.DEBUG, format=FORMAT)
         LOGGER = logging.getLogger("AddContactworker")
+        print configp.get('queue_name', 'add_contact')
         add_contact_queue_name = configp.get('queue_name', 'add_contact')
         try:
             self.msgworker(add_contact_queue_name)

@@ -23,10 +23,13 @@ class WhatsAppNewContactListener(restful.Resource):
 
 	def __init__(self):
 		try:
+                        print "trying setup..."
 			setup_logger('apilog', '/var/log/whatsapp_api/api.log')
+                        print "did setup occur?"
 			self.apilog = logging.getLogger('apilog')
 
 		except Exception as e:
+                        print e
 			self.apilog.error("SGLog:" + str("Unable to Initiate Logger"))
 			self.apilog.error("SGLog:" + str(e), exc_info=True)
 
@@ -46,7 +49,7 @@ class WhatsAppNewContactListener(restful.Resource):
 			final_message = json.dumps({"mobile_number":mobile_number,"emulator_name":emulator_name})
 
 			add_contact_queue_name = configp.get('queue_name', 'add_contact')
-
+                        print add_contact_queue_name
 			corr_id = Rabbit().msgproducer(add_contact_queue_name,final_message ,emulator_name)
 			
 			if corr_id:
